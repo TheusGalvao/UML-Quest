@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UML Quest - Créditos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00ff88;
+      --primary-dark: #00cc6a;
+      --secondary: #00b4d8;
+      --accent: #ff006e;
+      --dark: #0d1b2a;
+      --light: #e2eafc;
+      --neon-glow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--dark);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Oxanium', sans-serif;
+      color: var(--light);
+      overflow: hidden;
+    }
+
+    .creditos-container {
+      background: rgba(13, 27, 42, 0.8);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 2px solid var(--primary);
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      animation: fadeIn 1s ease forwards;
+    }
+    
+    .particle {
+      position: absolute;
+      background-color: rgba(0, 180, 216, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+
+    .titulo {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-shadow: var(--neon-glow);
+    }
+
+    .texto {
+      font-size: 1.2rem;
+      color: #c1d3fe;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .btn-voltar {
+      font-size: 1rem;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+    }
+
+    .btn-voltar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 255, 136, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="creditos-container">
+    <h1 class="titulo">Créditos</h1>
+    <p class="texto">
+      Este site foi desenvolvido por Matheus Galvão.<br>
+      @_theusgalvao_<br><br>
+      Inspirado em jogos de RPG e modelagem UML.<br>
+      Tecnologias utilizadas: HTML, CSS, JavaScript,<br>
+      Canva, ElevenLabs, ChatGPT, DeepSeek.<br>
+      Animações e efeitos em neon feitos com carinho! ✨<br>
+      Sprites utilizados na tela de jogo foram gerados por IA!<br>
+    </p>
+    <button class="btn-voltar" onclick="window.location.href='index.html'">⬅ Voltar</button>
+  </div>
+
+  <script>
+    // Geração de partículas de fundo
+    const colors = ['#00ff88', '#00b4d8', '#ff006e', '#ffbe0b'];
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 5 + 2;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.backgroundColor = color;
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+      particle.style.opacity = Math.random() * 0.5 + 0.1;
+      document.body.appendChild(particle);
+      animateParticle(particle);
+    }
+
+    function animateParticle(el) {
+      let x = parseFloat(el.style.left);
+      let y = parseFloat(el.style.top);
+      const xSpeed = (Math.random() - 0.5) * 0.3;
+      const ySpeed = (Math.random() - 0.5) * 0.3;
+      function move() {
+        x += xSpeed;
+        y += ySpeed;
+        if (x > 100) x = 0; if (x < 0) x = 100;
+        if (y > 100) y = 0; if (y < 0) y = 100;
+        el.style.left = `${x}vw`;
+        el.style.top = `${y}vh`;
+        requestAnimationFrame(move);
+      }
+      move();
+    }
+  </script>
+</body>
+</html>

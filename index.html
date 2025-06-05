@@ -1,145 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UML Quest - Menu</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #6c5ce7;
-      --primary-dark: #5649c0;
-      --secondary: #00cec9;
-      --accent: #fd79a8;
-      --dark: #2d3436;
-      --light: #f5f6fa;
+      --primary: #00ff88;
+      --primary-dark: #00cc6a;
+      --secondary: #00b4d8;
+      --accent: #ff006e;
+      --dark: #0d1b2a;
+      --light: #e2eafc;
+      --neon-glow: 0 0 10px var(--primary), 0 0 20px var(--primary);
     }
-    
+
     body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, var(--dark), #1a1a2e);
-      color: var(--light);
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-image: url('https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-      background-blend-mode: overlay;
+  font-family: 'Oxanium', sans-serif;
+  background: radial-gradient(circle at center, #1b263b, #0d1b2a);
+  color: var(--light);
+  padding: 20px;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+    .particle {
+      position: absolute;
+      background-color: rgba(0, 180, 216, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
     }
-    
+
     .container {
-      background-color: rgba(45, 52, 54, 0.9);
-      padding: 3rem;
-      border-radius: 20px;
+      background: rgba(13, 27, 42, 0.85);
+      padding: 40px;
+      border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      max-width: 600px;
-      margin: 2rem;
-      backdrop-filter: blur(5px);
       border: 2px solid var(--primary);
+      max-width: 600px;
+      position: relative;
     }
-    
+
+    .pixel-corner {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border: 3px solid var(--secondary);
+    }
+
+    .top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+    .top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+    .bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+    .bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
     h1 {
       font-family: 'Press Start 2P', cursive;
-      color: var(--secondary);
-      font-size: 2.5rem;
+      color: var(--primary);
+      font-size: 2rem;
       margin-bottom: 1.5rem;
-      text-shadow: 0 0 10px rgba(0, 206, 201, 0.5);
+      text-shadow: var(--neon-glow);
+      text-align: center;
     }
-    
+
     p {
-      font-size: 1.2rem;
-      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--light);
       line-height: 1.6;
-      color: #dfe6e9;
+      text-align: center;
     }
-    
+
     .btn {
-      padding: 15px 40px;
-      font-size: 1.2rem;
+      padding: 14px 32px;
+      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      border: none;
+      background: rgba(0, 180, 216, 0.2);
+      border: 2px solid var(--secondary);
       border-radius: 50px;
-      transition: all 0.3s ease;
-      color: white;
+      color: var(--light);
       text-transform: uppercase;
       letter-spacing: 1px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      position: relative;
-      overflow: hidden;
+      margin: 10px;
+      transition: all 0.3s ease;
     }
-    
+
     .btn:hover {
-      background: linear-gradient(to right, var(--primary-dark), var(--secondary));
+      background: rgba(0, 180, 216, 0.4);
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
     }
-    
-    .btn:active {
-      transform: translateY(1px);
-    }
-    
-    .btn::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
-    
-    .btn:hover::after {
-      transform: translateX(100%);
-    }
-    
-    .logo {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 1.5rem;
-      filter: drop-shadow(0 0 10px var(--secondary));
-    }
-    
+
+    .btn-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px; /* espaço entre os botões */
+}
+
     @media (max-width: 600px) {
-      .container {
-        padding: 2rem;
-        margin: 1rem;
-      }
-      
-      h1 {
-        font-size: 1.8rem;
-      }
-      
-      p {
-        font-size: 1rem;
-      }
-      
-      .btn {
-        padding: 12px 30px;
-        font-size: 1rem;
-      }
+      h1 { font-size: 1.5rem; }
+      p { font-size: 1rem; }
+      .btn { padding: 12px 24px; font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
+  <!-- Partículas -->
   <div class="container">
-    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-      <path d="M3.27 6.96L12 12.01l8.73-5.05"></path>
-      <path d="M12 22.08V12"></path>
-    </svg>
+    <div class="pixel-corner top-left"></div>
+    <div class="pixel-corner top-right"></div>
+    <div class="pixel-corner bottom-left"></div>
+    <div class="pixel-corner bottom-right"></div>
+
     <h1>UML QUEST</h1>
     <p>Derrote os monstros do desenvolvimento de software com seu conhecimento sobre Diagramas UML! Aventure-se nessa jornada épica e torne-se um mestre da modelagem.</p>
-    <button class="btn" onclick="window.location.href='intro.html'">Iniciar Jornada</button>
+      <div class="btn-group">
+      <button class="btn" onclick="window.location.href='intro.html'">▶ Iniciar Jornada</button>
+      <button class="btn" onclick="window.location.href='creditos.html'">Créditos</button>
+      </div>  
   </div>
+
+  <script>
+    // Geração de partículas de fundo
+    const colors = ['#00ff88', '#00b4d8', '#ff006e', '#ffbe0b'];
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 5 + 2;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.backgroundColor = color;
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+      particle.style.opacity = Math.random() * 0.5 + 0.1;
+      document.body.appendChild(particle);
+      animateParticle(particle);
+    }
+
+    function animateParticle(el) {
+      let x = parseFloat(el.style.left);
+      let y = parseFloat(el.style.top);
+      const xSpeed = (Math.random() - 0.5) * 0.3;
+      const ySpeed = (Math.random() - 0.5) * 0.3;
+      function move() {
+        x += xSpeed;
+        y += ySpeed;
+        if (x > 100) x = 0; if (x < 0) x = 100;
+        if (y > 100) y = 0; if (y < 0) y = 100;
+        el.style.left = `${x}vw`;
+        el.style.top = `${y}vh`;
+        requestAnimationFrame(move);
+      }
+      move();
+    }
+  </script>
 </body>
 </html>

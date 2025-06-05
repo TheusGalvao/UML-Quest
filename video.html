@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UML Quest - Introdução</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00ff88;
+      --secondary: #00b4d8;
+      --accent: #ff006e;
+      --dark: #0d1b2a;
+      --light: #e2eafc;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Oxanium', sans-serif;
+      background: radial-gradient(circle at center, #1b263b, var(--dark));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      color: var(--light);
+    }
+
+    video {
+      width: 90%;
+      max-width: 960px;
+      border: 4px solid var(--primary);
+      border-radius: 12px;
+      box-shadow: 0 0 20px var(--primary);
+      z-index: 1;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 1rem;
+      background: rgba(255, 0, 110, 0.2);
+      border: 2px solid var(--accent);
+      color: var(--light);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 1;
+    }
+
+    .btn:hover {
+      background: rgba(255, 0, 110, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .particle {
+      position: absolute;
+      background-color: rgba(0, 180, 216, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <video id="introVideo" controls autoplay>
+    <source src="video/Video1.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo.
+  </video>
+
+  <button class="btn" onclick="window.location.href='game.html'">Pular Introdução</button>
+
+  <script>
+    const colors = ['#00ff88', '#00b4d8', '#ff006e', '#ffbe0b'];
+
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const size = Math.random() * 5 + 2;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.left = `${Math.random() * 100}vw`;
+      p.style.top = `${Math.random() * 100}vh`;
+      p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      p.style.opacity = Math.random() * 0.5 + 0.1;
+      document.body.appendChild(p);
+      animateParticle(p);
+    }
+
+    function animateParticle(el) {
+      let x = parseFloat(el.style.left);
+      let y = parseFloat(el.style.top);
+      const xSpeed = (Math.random() - 0.5) * 0.3;
+      const ySpeed = (Math.random() - 0.5) * 0.3;
+      function move() {
+        x += xSpeed;
+        y += ySpeed;
+        if (x > 100) x = 0; if (x < 0) x = 100;
+        if (y > 100) y = 0; if (y < 0) y = 100;
+        el.style.left = `${x}vw`;
+        el.style.top = `${y}vh`;
+        requestAnimationFrame(move);
+      }
+      move();
+    }
+
+    document.getElementById('introVideo').onended = () => {
+      window.location.href = 'game.html';
+    };
+  </script>
+</body>
+</html>
